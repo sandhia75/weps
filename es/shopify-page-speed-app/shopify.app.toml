@@ -1,0 +1,17 @@
+client_id = "ba85518722bd9242529c988886bbe226"
+name = "Page Speed Optimizer"
+scopes = "write_products,read_products,write_pages,read_pages,write_themes,read_themes"
+
+[build]
+automatically_update_urls_on_dev = true
+
+[webhooks]
+api_version = "2024-01"
+
+[[webhooks.subscriptions]]
+topics = ["app/installed"]
+uri = "/webhooks/app/installed"
+
+[[webhooks.subscriptions]]
+topics = ["app/uninstalled"]
+uri = "/webhooks/app/uninstalled"

@@ -1,0 +1,164 @@
+.reviews-section {
+  width: 100%;
+}
+
+.reviews-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.reviews-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.reviews-subtitle {
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.reviews-slider {
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+  margin-top: 10px;
+}
+
+.reviews-track {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+  position: relative;
+  min-height: 350px;
+}
+
+.review-card {
+  background: white;
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  width: 300px;
+  flex-shrink: 0;
+  transition: all 0.5s ease;
+  opacity: 0.5;
+  transform: scale(0.85);
+  position: absolute;
+  left: 50%;
+}
+
+.review-card.active {
+  opacity: 1;
+  transform: scale(1) translateX(-34%);
+  z-index: 3;
+}
+
+.review-card.prev {
+  opacity: 1;
+  transform: scale(0.85) translateX(calc(-50% - 280px));
+  z-index: 2;
+}
+
+.review-card.next {
+  opacity: 1;
+  transform: scale(0.85) translateX(calc(-50% + 340px));
+  z-index: 2;
+}
+
+.stars {
+  color: #ffc107;
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+}
+
+.review-text {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.customer-name {
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+  color: #000;
+}
+
+.customer-location {
+  font-size: 0.9rem;
+  color: #888;
+}
+
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  transition: all 0.3s;
+  z-index: 10;
+  font-size: 0;
+}
+
+.nav-btn::before {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-top: 2px solid #333;
+  border-right: 2px solid #333;
+  top: 50%;
+  left: 50%;
+}
+
+.nav-btn.prev::before {
+  transform: translate(-30%, -50%) rotate(-135deg);
+}
+
+.nav-btn.next::before {
+  transform: translate(-70%, -50%) rotate(45deg);
+}
+
+.nav-btn.prev {
+  left: calc(50% - 200px);
+}
+
+.nav-btn.next {
+  right: calc(50% - 200px);
+}
+
+.nav-btn:hover::before {
+  border-color: #000;
+  border-width: 3px;
+}
+
+@media (max-width: 768px) {
+  .reviews-title {
+    font-size: 1.8rem;
+  }
+
+  .review-card {
+    width: 280px;
+  }
+
+  .review-card.prev,
+  .review-card.next {
+    display: none;
+  }
+
+  .review-card.active {
+    position: static;
+    transform: scale(1) translateX(0);
+  }
+
+  .reviews-track {
+    min-height: 300px;
+  }
+}

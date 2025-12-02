@@ -1,0 +1,23 @@
+{
+  "name": "shopify-page-speed-optimizer",
+  "version": "1.0.0",
+  "description": "Shopify app to increase page speed and improve Core Web Vitals",
+  "private": true,
+  "scripts": {
+    "build": "npm run build:web",
+    "build:web": "cd web && npm run build",
+    "dev": "concurrently \"cd web/backend && npm run dev\" \"cd web/frontend && npm run dev\"",
+    "dev:backend": "cd web/backend && npm run dev",
+    "dev:frontend": "cd web/frontend && npm run dev",
+    "setup": "shopify app setup web",
+    "generate": "shopify app generate"
+  },
+  "dependencies": {
+    "@shopify/app": "latest",
+    "@shopify/cli": "latest"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "prettier": "^3.0.0"
+  }
+}

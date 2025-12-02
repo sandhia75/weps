@@ -1,0 +1,73 @@
+{% schema %}
+{
+  "name": "Homepage reviews",
+  "settings": [
+    {"type": "text", "id": "heading", "label": "Heading", "default": "Customer Reviews"},
+    {"type": "textarea", "id": "subheading", "label": "Subheading", "default": "Hear from our delighted customers who have transformed their homes with Charlie Lux Home's exquisite décor. Real stories, real satisfaction."},
+    {"type": "color", "id": "bg_color", "label": "Background color", "default": "#f8f9fa"}
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        {"type": "text", "id": "name", "label": "Customer name", "default": "Customer name"},
+        {"type": "text", "id": "location", "label": "Location", "default": "Los Angeles, CA"},
+        {"type": "range", "id": "rating", "min": 1, "max": 5, "step": 1, "default": 5, "label": "Rating"},
+        {"type": "textarea", "id": "text", "label": "Review text", "default": "This is a wonderful product!"},
+        {"type": "image_picker", "id": "avatar", "label": "Customer avatar (optional)"}
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {"name": "Homepage reviews", "blocks": [{"type": "review"},{"type": "review"},{"type": "review"}]}
+  ]
+}
+{% endschema %}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    background-color: {{ section.settings.bg_color }};
+  }
+</style>
+
+<section class="hp-reviews page-width{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
+  <div class="hp-reviews__header{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+    {% if section.settings.heading != '' %}
+      <h2 class="hp-reviews__heading">{{ section.settings.heading }}</h2>
+    {% endif %}
+    {% if section.settings.subheading != '' %}
+      <p class="hp-reviews__subheading">{{ section.settings.subheading }}</p>
+    {% endif %}
+  </div>
+  <div class="hp-reviews__grid">
+    {% for block in section.blocks %}
+      <article class="hp-reviews__card{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}" {{ block.shopify_attributes }} {% if settings.animations_reveal_on_scroll %}data-cascade style="--animation-order: {{ forloop.index }};"{% endif %}>
+        <div class="hp-reviews__stars">
+          {% for i in (1..block.settings.rating) %}
+            <span class="hp-reviews__star">★</span>
+          {% endfor %}
+        </div>
+        {% if block.settings.text != '' %}
+          <p class="hp-reviews__text">{{ block.settings.text }}</p>
+        {% endif %}
+        <div class="hp-reviews__author">
+          {% if block.settings.avatar %}
+            <div class="hp-reviews__avatar">
+              {{ block.settings.avatar | image_url: width: 60 | image_tag: loading: 'lazy', class: 'hp-reviews__avatar-img' }}
+            </div>
+          {% endif %}
+          <div class="hp-reviews__author-info">
+            {% if block.settings.name != '' %}
+              <p class="hp-reviews__name">{{ block.settings.name }}</p>
+            {% endif %}
+            {% if block.settings.location != '' %}
+              <p class="hp-reviews__location">{{ block.settings.location }}</p>
+            {% endif %}
+          </div>
+        </div>
+      </article>
+    {% endfor %}
+  </div>
+</section>

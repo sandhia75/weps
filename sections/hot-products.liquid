@@ -1,0 +1,42 @@
+{% schema %}
+{
+  "name": "Hot products",
+  "settings": [
+    {"type": "text", "id": "kicker", "label": "Kicker text", "default": "Hot Products"},
+    {"type": "text", "id": "heading", "label": "Heading", "default": "Hot Products"},
+    {"type": "textarea", "id": "text", "label": "Text", "default": "Discover our most popular picks, carefully curated for you."},
+    {"type": "image_picker", "id": "image", "label": "Left image"},
+    {"type": "text", "id": "button_label", "label": "Button label", "default": "Shop Now"},
+    {"type": "url", "id": "button_link", "label": "Button link"}
+  ],
+  "presets": [
+    {"name": "Hot products"}
+  ]
+}
+{% endschema %}
+
+<section class="hp-hot-products page-width">
+  <div class="hp-hot-products__inner">
+    <div class="hp-hot-products__media">
+      {% if section.settings.image %}
+        <div class="hp-hot-products__image-wrapper">
+          {{ section.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy', class: 'hp-hot-products__image' }}
+        </div>
+      {% endif %}
+    </div>
+    <div class="hp-hot-products__content">
+      {% if section.settings.kicker != '' %}
+        <p class="hp-hot-products__kicker">{{ section.settings.kicker }}</p>
+      {% endif %}
+      {% if section.settings.heading != '' %}
+        <h2 class="hp-hot-products__heading">{{ section.settings.heading }}</h2>
+      {% endif %}
+      {% if section.settings.text != '' %}
+        <div class="hp-hot-products__text">{{ section.settings.text }}</div>
+      {% endif %}
+      {% if section.settings.button_label != '' and section.settings.button_link != blank %}
+        <a href="{{ section.settings.button_link }}" class="button hp-hot-products__button">{{ section.settings.button_label }}</a>
+      {% endif %}
+    </div>
+  </div>
+</section>
